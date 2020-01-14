@@ -8,7 +8,7 @@ public abstract class Organism {
     protected int life;
 
     public void reproduce() throws CloneNotSupportedException {
-        Position pos = world.randomAvailableNeighbour(this.position);
+        Position pos = world.randomAvailableNeighbourPosition(this.position);
         if (pos.getX() != -1) {
 
             Organism organism = (this.getClass().cast(this.clone()));
