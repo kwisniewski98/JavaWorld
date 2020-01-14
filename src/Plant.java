@@ -1,12 +1,9 @@
-public abstract class Plant extends Organism {
-    public void reproduce(){
-        Position pos = world.randomAvailableNeighbour(this.position);
-        if (pos.getX() != -1) {
+import java.util.Random;
 
-        }
-    }
+public abstract class Plant extends Organism {
     @Override
     public void makeAction(){
-        this.life--;
+        if (this.reproduceChance < new Random().nextInt(100))
+            this.life--;
     }
 }
