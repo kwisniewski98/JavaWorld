@@ -1,26 +1,22 @@
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.util.Random;
+
 public abstract class Organism {
     protected int power;
     protected Position position;
-    protected static int liveLength;
-    protected static char sign;
+    private Random rand = new Random();
+
     protected int reproduceChance; // 1 to 100;
     protected World world;
     protected int life;
 
-    public void reproduce() throws CloneNotSupportedException {
-        Position pos = world.randomAvailableNeighbourPosition(this.position);
-        if (pos.getX() != -1) {
-
-            Organism organism = (this.getClass().cast(this.clone()));
-            organism.setPosition(pos);
-            world.add(organism);
-
-
-        }
+    public static void setSpeciesPower(int speciesPower) {
+        throw new NotImplementedException();
     }
-    @Override
-    public String toString() {
-        return String.valueOf(sign);
+
+    public static void setSpeciesReproduceChance(int speciesReproduceChance) {
+        throw new NotImplementedException();
     }
 
     public int getPower() {
@@ -39,15 +35,53 @@ public abstract class Organism {
         this.position = position;
     }
 
-    public int getLiveLength() {
-        return liveLength;
+    public abstract String getSign();
+
+    public static void setSign(String sign) {
+        throw new NotImplementedException();
     }
 
-    public void setLiveLength(int liveLength) {
-        this.liveLength = liveLength;
+    public Organism reproduce() throws CloneNotSupportedException {
+        Position pos = world.randomAvailableNeighbourPosition(this.position);
+        if (pos.getX() != -1) {
+
+            Organism organism = (this.getClass().cast(this.clone()));
+            organism.setPosition(pos);
+            world.add(organism);
+            this.reproduceChance /= 2;
+            return organism;
+        } else {
+            return null;
+        }
+
     }
 
-    public abstract void makeAction() throws CloneNotSupportedException;
+    public abstract int getLiveLength();
 
+    public static void setLiveLength(int liveLength) {
+        throw new NotImplementedException();
+    }
 
+    public abstract String makeAction() throws CloneNotSupportedException;
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public Random getRand() {
+        return rand;
+    }
+
+    public void setRand(Random rand) {
+        this.rand = rand;
+    }
 }

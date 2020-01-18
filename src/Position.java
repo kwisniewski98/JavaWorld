@@ -8,40 +8,42 @@ public class Position {
     private static int maxY;
 
     public Position(int x, int y) {
-        this.x = x;
-        this.y = y;
+        if (x < maxX && x >= 0) {
+            this.x = x;
+        } else {
+            if (x < 0) {
+                this.x = 0;
+            } else {
+                this.x = maxX;
+            }
+        }
+        if (y < maxY && y >= 0) {
+            this.y = y;
+        } else {
+            if (y < 0) {
+                this.y = 0;
+            } else {
+                this.y = maxY;
+            }
+        }
+
+    }
+
+    public static void setMaxX(int maxX) {
+        Position.maxX = maxX;
     }
 
     public int getX() {
         return x;
     }
 
-    public void setX(int x) {
-        if( x < maxX && x >= 0){
-         this.x = x;
-        }else{
-            if (x < 0){
-                this.x = 0;
-            }
-            else {this.x = maxX;}
-        }
+    public static void setMaxY(int maxY) {
+        Position.maxY = maxY;
     }
 
     public int getY() {
         return y;
     }
-
-    public void setY(int y) {
-        if( y < maxY && y >= 0){
-            this.y = y;
-        }else{
-            if (y < 0){
-                this.y = 0;
-            }
-            else {this.y = maxY;}
-        }
-    }
-
 
     @Override
     public String toString() {
@@ -64,15 +66,16 @@ public class Position {
 
     public ArrayList<Position> neighbours() {
         ArrayList<Position> positions = new ArrayList<>();
-        for (int i = -1; i < 2; i++){
-            if (this.x + i < maxX && this.x + i > -1){
-                for (int j = -1; j < 2; j++){
-                    if (this.y + j < maxY && this.y + j > -1){
+        for (int i = -1; i < 2; i++) {
+            if (this.x + i < maxX && this.x + i > -1) {
+                for (int j = -1; j < 2; j++) {
+                    if (this.y + j < maxY && this.y + j > -1) {
                         positions.add(new Position(this.x + i, this.y + j));
                     }
                 }
             }
         }
+        positions.removeIf(item -> item.getX() == this.x && item.getY() == this.y);
         return positions;
     }
 }

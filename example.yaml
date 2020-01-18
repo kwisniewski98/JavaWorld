@@ -1,0 +1,63 @@
+---
+WorldSize: "20,20"
+Grass:
+  liveLength: 10
+  speciesPower: 2
+  speciesReproduceChance: 40
+  sign: 0x1F33F
+Mushroom:
+  liveLength: 5
+  speciesPower: 25
+  speciesReproduceChance: 40
+  sign: 0x1F344
+Sheep:
+  liveLength: 8
+  speciesPower: 25
+  speciesReproduceChance: 80
+  sign: 0x1F411
+  speed: 1
+  aggression: 10
+Snake:
+  liveLength: 15
+  speciesPower: 80
+  speciesReproduceChance: 20
+  sign: 0x1F40D
+  speed: 1
+  aggression: 70
+Wolf:
+  liveLength: 5
+  speciesPower: 50
+  speciesReproduceChance: 40
+  sign: 0x1F43A
+  speed: 2
+  aggression: 50
+Nothing: 0x1F5CC
+RandomPositions: true
+# if RandomPositions: true
+Layout:
+  Grass: 3
+  Mushroom: 5
+  Sheep: 2
+  Snake: 3
+  Wolf: 3
+# else
+#Layout:
+#  Grass:
+#    # X,Y
+#    - "0,1"
+#    - "0,0"
+#    - "1,0"
+#  Mushroom:
+#    - "3,3"
+#    - "5,5"
+#    - "2,8"
+#  Sheep:
+#    - "4,7"
+#  Snake:
+#    - "7,5"
+#    - "10,10"
+#  Wolf:
+#    - "4,8"
+#    - "3,9"
+
+
