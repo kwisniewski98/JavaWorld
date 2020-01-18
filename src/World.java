@@ -18,14 +18,21 @@ public class World {
     private int nothing = 0x1F5CC;
     private Random random = new Random();
 
-    public World(int maxY, int maxX) {
+    public World(int maxX, int maxY) {
         this.maxY = maxY;
         this.maxX = maxX;
         this.turn = 0;
         this.organisms = new ArrayList<>();
-        this.layout = new String[maxY][maxX];
         this.resize(maxX, maxY);
 
+    }
+
+    public int getMaxY() {
+        return maxY;
+    }
+
+    public int getMaxX() {
+        return maxX;
     }
 
     public Random getRandom() {
@@ -39,6 +46,7 @@ public class World {
     public void resize(int maxX, int maxY) {
         this.maxY = maxY;
         this.maxX = maxX;
+        this.layout = new String[maxY][maxX];
         for (int y = 0; y < maxY; y++) {
             for (int x = 0; x < maxX; x++) {
                 this.layout[y][x] = new String(Character.toChars(this.nothing));
@@ -57,14 +65,16 @@ public class World {
     }
 
     public void add(Organism organism) {
-
+        boolean isPositionAvailable = true;
         for (Iterator<Organism> it = this.organisms.iterator(); it.hasNext(); ) {
             Organism item = it.next();
-            if (item.getPosition() == organism.getPosition()) {
-                return;
+            if (item.getPosition().equals(organism.getPosition())) {
+                isPositionAvailable = false;
             }
         }
-        this.organisms.add(organism);
+        if (isPositionAvailable) {
+            this.organisms.add(organism);
+        }
     }
 
     public ArrayList<Organism> getNeighbours(Organism organism) {
@@ -114,7 +124,7 @@ public class World {
         }
         positions.remove(pos);
         if (positions.size() > 0) {
-            return positions.get(new Random().nextInt(positions.size()));
+            return positions.get(this.getRandom().nextInt(positions.size()));
         } else {
             return new Position(-1, -1);
         }
@@ -124,9 +134,9 @@ public class World {
     public Organism getRandomNeighbour(Organism organism) {
         ArrayList<Organism> neighbours = this.getNeighbours(organism);
         if (neighbours.size() > 0) {
-            return neighbours.get(new Random().nextInt(neighbours.size()));
+            return neighbours.get(this.getRandom().nextInt(neighbours.size()));
         } else {
-            return organism;
+            return null;
         }
     }
 
@@ -148,7 +158,7 @@ public class World {
         return result;
     }
 
-    public void worldLayout() {
+    private void worldLayout() {
         for (int y = 0; y < maxY; y++) {
             for (int x = 0; x < maxX; x++) {
                 this.layout[y][x] = new String(Character.toChars(this.nothing));

@@ -57,9 +57,11 @@ public abstract class Animal extends Organism {
             } else {
                 if (random.nextInt(100) > this.getaggression()) {
                     Organism organism = world.getRandomNeighbour(this);
-                    String resultAttack = this.attack(organism);
-                    return this.getClass().toString().split("\\s+")[1] + " attacked " +
-                            organism.getClass().toString().split("\\s+")[1] + " and " + resultAttack;
+                    if (organism != null) {
+                        String resultAttack = this.attack(organism);
+                        return this.getClass().toString().split("\\s+")[1] + " attacked " +
+                                organism.getClass().toString().split("\\s+")[1] + " and " + resultAttack;
+                    }
 
                 }
             }
